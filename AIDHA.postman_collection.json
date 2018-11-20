@@ -1,0 +1,114 @@
+{
+	"variables": [],
+	"info": {
+		"name": "AIDHA",
+		"_postman_id": "9171ad61-c840-2a34-17f2-26dd683514d0",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"description": "",
+			"item": [
+				{
+					"name": "User logout",
+					"request": {
+						"url": {
+							"raw": "localhost:5000/logout?redirect_url=https://google.com",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"logout"
+							],
+							"query": [
+								{
+									"key": "redirect_url",
+									"value": "https://google.com",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Check login status",
+					"request": {
+						"url": "localhost:5000/login",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "User login",
+					"request": {
+						"url": "localhost:5000/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user_id\": \"new_test_123\",\n\t\"password\": \"xxxx\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"description": "",
+			"item": [
+				{
+					"name": "Get info of logged in user",
+					"request": {
+						"url": "localhost:5000/user",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Create new user",
+					"request": {
+						"url": "localhost:5000/user/create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user_id\": \"new_test_123\",\n\t\"first_name\": \"max\",\n\t\"last_name\": \"kusnadi\",\n\t\"password\": \"xxxx\",\n\t\"monthly_income\": 1250\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
