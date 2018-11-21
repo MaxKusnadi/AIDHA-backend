@@ -1,19 +1,22 @@
 {
-	"variables": [],
 	"info": {
+		"_postman_id": "2c35fc55-3780-4b64-8cfa-9f62344ba12f",
 		"name": "AIDHA",
-		"_postman_id": "9171ad61-c840-2a34-17f2-26dd683514d0",
-		"description": "",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "Login",
-			"description": "",
 			"item": [
 				{
 					"name": "User logout",
 					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "localhost:5000/logout?redirect_url=https://google.com",
 							"host": [
@@ -26,48 +29,59 @@
 							"query": [
 								{
 									"key": "redirect_url",
-									"value": "https://google.com",
-									"equals": true,
-									"description": ""
+									"value": "https://google.com"
 								}
-							],
-							"variable": []
-						},
-						"method": "GET",
-						"header": [],
-						"body": {},
-						"description": ""
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Check login status",
 					"request": {
-						"url": "localhost:5000/login",
 						"method": "GET",
 						"header": [],
-						"body": {},
-						"description": ""
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"login"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "User login",
 					"request": {
-						"url": "localhost:5000/login",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"user_id\": \"new_test_123\",\n\t\"password\": \"xxxx\"\n}"
 						},
-						"description": ""
+						"url": {
+							"raw": "localhost:5000/login",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"login"
+							]
+						}
 					},
 					"response": []
 				}
@@ -75,36 +89,130 @@
 		},
 		{
 			"name": "User",
-			"description": "",
 			"item": [
 				{
 					"name": "Get info of logged in user",
 					"request": {
-						"url": "localhost:5000/user",
 						"method": "GET",
 						"header": [],
-						"body": {},
-						"description": ""
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/user",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Create new user",
 					"request": {
-						"url": "localhost:5000/user/create",
 						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
-								"value": "application/json",
-								"description": ""
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"user_id\": \"new_test_123\",\n\t\"first_name\": \"max\",\n\t\"last_name\": \"kusnadi\",\n\t\"password\": \"xxxx\",\n\t\"monthly_income\": 1250\n}"
 						},
-						"description": ""
+						"url": {
+							"raw": "localhost:5000/user/create",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Config",
+			"item": [
+				{
+					"name": "Get configs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Expenses",
+			"item": [
+				{
+					"name": "Get expenses of logged in user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:5000/expense",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"expense"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post new expenses from logged in user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"date\": \"2018-11-20\",\n\t\"description\": \"test\",\n\t\"spending_type\": \"Family\",\n\t\"category\": \"Remittance\",\n\t\"amount\": 200\n}"
+						},
+						"url": {
+							"raw": "localhost:5000/expense",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"expense"
+							]
+						}
 					},
 					"response": []
 				}
