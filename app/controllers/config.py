@@ -9,17 +9,18 @@ from app.controllers.google_sheet import gsheets
 class ConfigController:
 
     #  GSpread column starts from 1
-    CATEGORY_WORKSHEET_INDEX = 0
-    SPENDING_TYPE_WORKSHEET_INDEX = 1
-    SPENDING_TYPE_COLUMN = 1
+    CONFIG_WORKSHEET_TITLE = "Configs"
     MONTHLY_CATEGORY_COLUMN = 1
     ANNUAL_CATEGORY_COLUMN = 2
     OCCASSIONAL_CATEGORY_COLUMN = 3
+    SPENDING_TYPE_COLUMN = 4
 
     def __init__(self):
         self.file = gsheets.open_by_key(CONFIG_SHEET_ID)
 
     def get_configs(self):
+        x = self.file.worksheets()
+        logging.info(x)
         # Trying to get user with user_id
         retry = 5
         is_fetched = False
@@ -30,12 +31,11 @@ class ConfigController:
         while retry > 0 and not is_fetched:
             retry -= 1
             try:
-                category_ws = self.file.get_worksheet(self.CATEGORY_WORKSHEET_INDEX)
-                spending_type_ws = self.file.get_worksheet(self.SPENDING_TYPE_WORKSHEET_INDEX)
-                spending_type = spending_type_ws.col_values(self.SPENDING_TYPE_COLUMN)[1:]
-                monthly_category = category_ws.col_values(self.MONTHLY_CATEGORY_COLUMN)[1:]
-                annual_category = category_ws.col_values(self.ANNUAL_CATEGORY_COLUMN)[1:]
-                occassional_category = category_ws.col_values(self.OCCASSIONAL_CATEGORY_COLUMN)[1:]
+                config_ws = self.file.worksheet(self.CONFIG_WORKSHEET_TITLE)
+                spending_type = config_ws.col_values(self.SPENDING_TYPE_COLUMN)[1:]
+                monthly_category = config_ws.col_values(self.MONTHLY_CATEGORY_COLUMN)[1:]
+                annual_category = config_ws.col_values(self.ANNUAL_CATEGORY_COLUMN)[1:]
+                occassional_category = config_ws.col_values(self.OCCASSIONAL_CATEGORY_COLUMN)[1:]
             except APIError:
                 logging.error("Authentication error. Re-logging in")
                 gsheets.login()
