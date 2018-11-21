@@ -2,7 +2,7 @@ import logging
 
 from gspread.exceptions import CellNotFound, APIError
 
-from app.constants import USER_SHEET_ID
+from app.constants import USER_SHEET_ID, DEFAULT_RETRY
 from app.controllers.google_sheet import gsheets
 from app.models.user import User
 
@@ -29,7 +29,7 @@ class UserController:
 
     def get_user(self, user_id):
         # Trying to get user with user_id
-        retry = 5
+        retry = DEFAULT_RETRY
         is_fetched = False
         cell = None
         while retry > 0 and not is_fetched:
@@ -58,9 +58,8 @@ class UserController:
 
     def _store_user(self, user):
         values = [user.user_id, user.first_name, user.last_name, user.monthly_income, user.get_password().decode()]
-        retry = 5
+        retry = DEFAULT_RETRY
         is_done = False
-        cell = None
         while retry > 0 and not is_done:
             retry -= 1
             try:

@@ -1,5 +1,3 @@
-import random
-
 from flask_login import UserMixin
 
 from app import bcrypt

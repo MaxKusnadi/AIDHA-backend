@@ -19,6 +19,7 @@ class UserView(MethodView):
         resp['first_name'] = current_user.first_name
         resp['last_name'] = current_user.last_name
         resp['monthly_income'] = current_user.monthly_income
+        resp['status'] = 200
         return json.dumps(resp)
 
 
@@ -54,6 +55,7 @@ class UserCreationView(MethodView):
             resp['first_name'] = user.first_name
             resp['last_name'] = user.last_name
             resp['monthly_income'] = user.monthly_income
+            resp['status'] = 200
         except FileExistsError:
             return json.dumps({
                 "text": "user already exists",

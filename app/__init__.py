@@ -21,3 +21,4 @@ login_manager = LoginManager(app)
 from app.views.login import *
 from app.views.user import *
 from app.views.config import *
+from app.views.expenses import *

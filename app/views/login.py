@@ -53,6 +53,7 @@ class LoginView(MethodView):
                 "text": "wrong password",
                 "status": 403
             })
+        resp['status'] = 200
         return json.dumps(resp)
 
 

@@ -2,7 +2,7 @@ import logging
 
 from gspread.exceptions import APIError
 
-from app.constants import CONFIG_SHEET_ID
+from app.constants import CONFIG_SHEET_ID, DEFAULT_RETRY
 from app.controllers.google_sheet import gsheets
 
 
@@ -19,10 +19,8 @@ class ConfigController:
         self.file = gsheets.open_by_key(CONFIG_SHEET_ID)
 
     def get_configs(self):
-        x = self.file.worksheets()
-        logging.info(x)
-        # Trying to get user with user_id
-        retry = 5
+        # Trying to get all configs
+        retry = DEFAULT_RETRY
         is_fetched = False
         annual_category = []
         monthly_category = []

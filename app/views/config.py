@@ -20,6 +20,7 @@ class ConfigView(MethodView):
                 "text": "Google authentication error. Please restart the backend",
                 "status": 500
             })
+        resp['status'] = 200
         return json.dumps(resp)
 
 
