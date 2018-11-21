@@ -1,6 +1,6 @@
 import logging
 
-from gspread.exceptions import CellNotFound
+from gspread.exceptions import CellNotFound, APIError
 
 from app.constants import USER_SHEET_ID
 from app.controllers.google_sheet import gsheets
@@ -29,12 +29,23 @@ class UserController:
 
     def get_user(self, user_id):
         # Trying to get user with user_id
-        try:
-            cell = self.worksheet.find(user_id)
-        except CellNotFound:
-            logging.error("User ID {} is not found".format(user_id))
+        retry = 5
+        is_fetched = False
+        cell = None
+        while retry > 0 and not is_fetched:
+            retry -= 1
+            try:
+                cell = self.worksheet.find(user_id)
+            except CellNotFound:
+                logging.error("User ID {} is not found".format(user_id))
+                return None
+            except APIError:
+                logging.error("Authentication error. Re-logging in")
+                gsheets.login()
+            else:
+                is_fetched = True
+        if not cell:
             return None
-
         # Get user information if cell is found
         cell_row = cell.row
         user_info = self.worksheet.row_values(cell_row)
@@ -47,8 +58,19 @@ class UserController:
 
     def _store_user(self, user):
         values = [user.user_id, user.first_name, user.last_name, user.monthly_income, user.get_password().decode()]
-        self.worksheet.append_row(values)
-        return True
+        retry = 5
+        is_done = False
+        cell = None
+        while retry > 0 and not is_done:
+            retry -= 1
+            try:
+                self.worksheet.append_row(values)
+            except APIError:
+                logging.error("Authentication error. Re-logging in")
+                gsheets.login()
+            else:
+                is_done = True
+        return is_done
 
 
 user_controller = UserController()

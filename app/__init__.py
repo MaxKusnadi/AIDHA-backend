@@ -20,3 +20,4 @@ login_manager = LoginManager(app)
 # Initializing views
 from app.views.login import *
 from app.views.user import *
+from app.views.config import *
