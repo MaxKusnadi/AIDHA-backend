@@ -58,7 +58,7 @@ class LoginView(MethodView):
 
 
 class LogoutView(MethodView):
-    decorators = [login_required]
+    # decorators = [login_required]
 
     def get(self):
         redirect_url = request.args.get("redirect_url")
