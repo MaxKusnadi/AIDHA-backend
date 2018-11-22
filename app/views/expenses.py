@@ -15,8 +15,9 @@ class ExpenseView(MethodView):
 
     def get(self):
         logging.info("New GET /expense request")
+        user_id = request.args.get("user_id")
         try:
-            expenses = expense_controller.get_all_expenses(current_user.user_id)
+            expenses = expense_controller.get_all_expenses(user_id)
         except ConnectionError:
             return json.dumps({
                 "text": "Google authentication error. Please restart the backend",
@@ -36,7 +37,7 @@ class ExpenseView(MethodView):
                 "text": "payload is not found",
                 "status": 400
             })
-        user_id = current_user.user_id
+        user_id = data.get('user_id')
         date = data.get("date")
         description = data.get("description", "No Description")
         spending_type = data.get("spending_type")
