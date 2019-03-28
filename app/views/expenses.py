@@ -11,7 +11,6 @@ from app.models.expenses import Expenses
 
 
 class ExpenseView(MethodView):
-    decorators = [login_required]
 
     def get(self):
         logging.info("New GET /expense request")
@@ -64,4 +63,11 @@ class ExpenseView(MethodView):
         })
 
 
+class Index(MethodView):
+
+    def get(self):
+        return 'Nothing to see here'
+
+
 app.add_url_rule('/expense', view_func=ExpenseView.as_view('expense'))
+app.add_url_rule('/', view_func=Index.as_view('index'))
