@@ -10,6 +10,7 @@ from app.controllers.user import user_controller
 
 
 class UserView(MethodView):
+    decorators = [login_required]
 
     def get(self):
         logging.info("New GET /user request")

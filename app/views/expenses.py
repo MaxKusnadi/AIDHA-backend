@@ -11,6 +11,7 @@ from app.models.expenses import Expenses
 
 
 class ExpenseView(MethodView):
+    decorators = [login_required]
 
     def get(self):
         logging.info("New GET /expense request")

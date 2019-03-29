@@ -9,6 +9,7 @@ from app.controllers.config import config_controller
 
 
 class ConfigView(MethodView):
+    decorators = [login_required]
 
     def get(self):
         logging.info("New GET /config request")
